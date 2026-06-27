@@ -15,25 +15,29 @@
 <body>
     <header class="app-header">
         <div class="container text-center">
-            <span class="badge" id="app-badge"><i class="fa-solid fa-spinner fa-spin"></i> Inicializando Sistema</span>
+            <span class="badge" id="app-badge"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</span>
             <h1 id="app-title">Carregando...</h1>
-            <p id="app-subtitle" class="subtitle">Carregando metadados do curso...</p>
+            <div id="app-subtitle" class="subtitle">Carregando metadados...</div>
         </div>
     </header>
 
     <nav class="app-nav">
-        <div class="container" id="nav-container">
-            </div>
+        <div class="container nav-wrapper">
+            <span class="mobile-nav-title"><i class="fa-solid fa-bars-staggered" style="color: var(--primary)"></i> Menu da Aula</span>
+            <button id="btn-mobile" aria-label="Abrir menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div id="nav-container" class="nav-menu">
+                </div>
+        </div>
     </nav>
 
-    <main class="app-main container" id="app-content">
-        </main>
+    <main class="app-main container" id="app-content"></main>
 
     <script src="data_intro.js"></script>
     <script src="data_oficina.js"></script>
     <script src="data_infra.js"></script>
     <script src="data_quiz.js"></script>
-    
     <script src="app.js"></script>
 </body>
 </html>

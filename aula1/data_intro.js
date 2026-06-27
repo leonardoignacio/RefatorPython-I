@@ -1,7 +1,7 @@
 window.AULA_METADATA = {
-    badge: "Módulo 1: Fundamentos de Desenvolvimento",
-    title: "Lógica, Python & Fluxos Corporativos",
-    subtitle: "Aprenda construindo um Analisador de Reembolso Corporativo do absoluto zero ao deploy automatizado."
+    badge: "Aula 1: Fundamentos de Desenvolvimento",
+    title: "Lógica & Python",
+    subtitle: "• Variáveis, Condicionais e tratamento de exceções.<br>• Pisando no acelerador com um Copiloto (IA generativa)"
 };
 
 const SVG_FLUXOGRAMA = `

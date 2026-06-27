@@ -1,6 +1,6 @@
 /**
  * MOTOR OPERACIONAL DA SPA (ES2024+)
- * Gerencia roteamento por abas, acordeons duplos e auditoria de quiz.
+ * Controla navegação acoplada a menu sanduíche mobile.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,13 +9,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inicializarHeader();
     renderizarNavegacao();
+    engatilharSanduiche();
     renderizarConteudo("intro");
 });
 
 function inicializarHeader() {
     document.getElementById("app-title").innerText = window.AULA_METADATA.title;
-    document.getElementById("app-subtitle").innerText = window.AULA_METADATA.subtitle;
+    document.getElementById("app-subtitle").innerHTML = window.AULA_METADATA.subtitle;
     document.getElementById("app-badge").innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${window.AULA_METADATA.badge}`;
+}
+
+function engatilharSanduiche() {
+    const btn = document.getElementById("btn-mobile");
+    const menu = document.getElementById("nav-container");
+    
+    if(btn && menu) {
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("active");
+            const icone = btn.querySelector("i");
+            if(menu.classList.contains("active")) {
+                icone.className = "fa-solid fa-xmark";
+            } else {
+                icone.className = "fa-solid fa-bars";
+            }
+        });
+    }
 }
 
 function renderizarNavegacao() {
@@ -30,6 +48,13 @@ function renderizarNavegacao() {
             window.ESTADO.abaAtual = sec.id;
             renderizarNavegacao();
             renderizarConteudo(sec.id);
+            
+            const menu = document.getElementById("nav-container");
+            const iconeBtn = document.querySelector("#btn-mobile i");
+            if(menu && menu.classList.contains("active")) {
+                menu.classList.remove("active");
+                if(iconeBtn) iconeBtn.className = "fa-solid fa-bars";
+            }
         };
         nav.appendChild(btn);
     });
@@ -90,11 +115,10 @@ function renderizarConteudo(id) {
 }
 
 function renderizarAbaRevisao(secao, container) {
-    // 1. Bloco das Perguntas Norteadoras (Síntese Pedagógica da Dri)
     const cardNorteadores = document.createElement("div");
     cardNorteadores.className = "card";
     cardNorteadores.innerHTML = `<h2><i class="fa-solid fa-compass" style="color:var(--primary)"></i> Síntese Teórica (Perguntas Norteadoras)</h2>
-                                 <p>Antes de auditar seus reflexos no quiz, explore os 5 princípios estruturais que amarraram a lógica corporativa desta aula:</p>`;
+                                 <p>Explore os 5 princípios estruturais fundamentais abordados nesta aula:</p>`;
 
     secao.guidingQuestions.forEach((item) => {
         const acc = document.createElement("div");
@@ -110,7 +134,6 @@ function renderizarAbaRevisao(secao, container) {
 
         head.onclick = () => {
             const isOpen = acc.classList.contains("active");
-            // Isola o recolhimento apenas aos norteadores deste card
             cardNorteadores.querySelectorAll(".accordion").forEach(el => {
                 el.classList.remove("active");
                 el.querySelector(".toggle-icon").className = "fa-solid fa-chevron-down toggle-icon";
@@ -128,7 +151,6 @@ function renderizarAbaRevisao(secao, container) {
 
     container.appendChild(cardNorteadores);
 
-    // 2. Bloco do Quiz Diagnóstico
     const topoQuiz = document.createElement("div");
     topoQuiz.className = "card text-center";
     topoQuiz.style.marginTop = "2.5rem";
