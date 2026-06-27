@@ -1,7 +1,34 @@
+/**
+ * DADOS: REVISÃO DE CONHECIMENTOS (Norteadores + Quiz)
+ * Responsáveis: Dri (Perguntas Norteadoras) e Gui (Estrutura de Objeto)
+ */
+
 window.DATA_QUIZ = {
-    id: "quiz",
-    title: "4. Avaliação Diagnóstica",
-    icon: "fa-solid fa-list-check",
+    id: 'quiz',
+    title: '4. Revisão de Conhecimentos',
+    icon: 'fa-solid fa-list-check',
+    guidingQuestions: [
+        {
+            q: '1. Por que a conversão explícita (Casting) é obrigatória ao capturar valores numéricos?',
+            a: 'Porque a função nativa input() captura qualquer digitação do teclado estritamente como texto puro (str). Tratar o número "150.00" como texto impede operações aritméticas. O Casting para float aloca o dado como ponto flutuante, garantindo a precisão decimal exigida por cálculos corporativos.'
+        },
+        {
+            q: '2. Como a estrutura if / elif / else atua como um "Compliance Officer" no código?',
+            a: 'Ela materializa as regras de negócio da empresa em rotas de execução excludentes. Ao avaliar as premissas de cima para baixo, o sistema garante que a despesa seja processada na primeira regra satisfeita e encerra o bloco, impedindo ambiguidades ou aprovações duplicadas.'
+        },
+        {
+            q: '3. Qual é o custo operacional de negligenciar o bloco try / except?',
+            a: 'O custo é a paralisação súbita do sistema. Sem essa barreira defensiva, um simples erro de digitação do usuário (como inserir a letra "O" no lugar do número zero) provoca um crash fatal. O Try isola o risco e o Except converte a falha em um aviso amigável na tela.'
+        },
+        {
+            q: '4. De que forma o princípio DRY (Don\'t Repeat Yourself) otimizou a evolução do script?',
+            a: 'Código duplicado é código frágil. No "Caminho Feliz", escrevemos vários comandos de impressão idênticos. Se a diretoria decidisse alterar o texto do parecer, teríamos que modificar várias linhas. Centralizar o resultado em uma variável de estado reduziu a chance de bugs.'
+        },
+        {
+            q: '5. Qual é a fronteira de responsabilidade entre o Copiloto de IA e o Desenvolvedor?',
+            a: 'A Inteligência Artificial opera como um acelerador cognitivo e gerador de sugestões sintáticas; o ser humano é o curador lógico, auditor de segurança e detentor da responsabilidade civil do software. Submeter código gerado por LLM à produção sem revisão crítica é inaceitável.'
+        }
+    ],
     questions: [
         {
             q: "1. Na documentação oficial do Python, qual é o tipo de dado devolvido invariavelmente pela função input()?",
@@ -34,10 +61,10 @@ window.DATA_QUIZ = {
             exp: "O finally é a rotina incondicional de finalização. Quer a operação passe limpa, quer sofra um erro drástico, suas instruções ocorrerão no encerramento do escopo de memória."
         },
         {
-            q: "6. No código da Versão 2.0, qual a imensa vantagem de usar um Dicionário (Lookup Table) em vez de múltiplos 'elif' encadeados?",
-            opts: ["Elimina o acoplamento, mantendo os limites separados da lógica condicional, facilitando a escalabilidade.", "Os dicionários ativam automaticamente a aceleração via placa de vídeo (GPU).", "A estrutura if/elif não possui capacidade nativa para gravação de arquivos de texto.", "É o único formato estrutural que a interface Tkinter aceita como entrada de dados."],
+            q: "6. No código da Versão 2.0, qual a imensa vantagem de aplicar o princípio DRY (Don't Repeat Yourself)?",
+            opts: ["Evita repetição de código, centralizando saídas em variáveis de estado, facilitando futuras refatorações.", "O código limpo ativa automaticamente a aceleração via placa de vídeo (GPU).", "A estrutura if/elif não possui capacidade nativa para gravação de arquivos de texto.", "É o único formato estrutural que a interface Tkinter aceita como entrada de dados."],
             correct: 0,
-            exp: "Utilizar matrizes e tabelas de pesquisa é um padrão que elimina a complexidade ciclomática. Se a empresa criar 50 novas categorias, basta adicioná-las ao Dicionário, sem mexer no if/else."
+            exp: "Centralizar retornos em variáveis de estado reduz a complexidade ciclomática. Se a empresa alterar o padrão visual de resposta, você altera apenas uma linha."
         },
         {
             q: "7. Ao orquestrar um Modelo de Linguagem (IA) para gerar refatorações de código, qual a obrigação ética e técnica do Desenvolvedor?",
@@ -46,10 +73,10 @@ window.DATA_QUIZ = {
             exp: "A IA é um acelerador implacável de produtividade, mas a responsabilidade civil pelo produto de software, a validação de negócios e a auditoria de segurança permanecem com o humano."
         },
         {
-            q: "8. Em um cenário corporativo (DevOps), por qual razão conteinerizamos o software?",
-            opts: ["Para inflar o armazenamento local requisitado pelas bibliotecas gráficas.", "Para criar animações suaves (CSS Transitions) nos relatórios gerados via web.", "Para empacotar a aplicação e suas dependências de forma idêntica, independente da infraestrutura (Windows, Mac, Servidores Linux).", "Para ocultar o código-fonte da equipe de auditoria financeira externa."],
+            q: "8. Em um cenário de distribuição no Windows, por qual razão empacotamos o arquivo .py em um .exe?",
+            opts: ["Para inflar o armazenamento local requisitado pelas bibliotecas gráficas.", "Para criar animações suaves (CSS Transitions) nos relatórios gerados.", "Para abstrair a necessidade de o cliente possuir o Python instalado ou saber rodar scripts via terminal.", "Para ocultar o código-fonte da equipe de auditoria financeira externa."],
             correct: 2,
-            exp: "A conteinerização (Docker) anula os atritos de configuração local, fornecendo um ambiente hermético e estável para a execução do interpretador Python em qualquer host do planeta."
+            exp: "O PyInstaller acopla o interpretador e as bibliotecas ao binário, entregando um artefato autossuficiente que qualquer usuário de negócios consegue rodar com um duplo clique."
         },
         {
             q: "9. Analisando a sentença: if categoria == 'transporte' and valor <= 150.0:. O que o operador lógico 'and' exige tecnicamente?",
@@ -58,7 +85,7 @@ window.DATA_QUIZ = {
             exp: "O operador lógico 'and' (E) é restritivo por excelência. A validação total só é concedida se a afirmação à esquerda e a afirmação à direita forem integralmente verdadeiras."
         },
         {
-            q: "10. No uso do gerenciador de contexto 'with open(\"arquivo.txt\", \"a\")', o que determina o parâmetro \"a\"?",
+            q: "10. No uso do gerenciador de contexto 'with open(\"relatorio.txt\", \"a\")', o que determina o parâmetro \"a\"?",
             opts: ["Arquivo (Archive) - Inicializa a compactação nativa do Windows em formato ZIP.", "Anexação (Append) - Escreve os novos registros ao final do arquivo preservando todo o histórico anterior.", "Apagar (All) - Realiza o expurgo de todos os dados do arquivo antes da inserção.", "Alerta (Alert) - Emite um aviso sonoro sempre que o sistema operacional negar acesso de gravação."],
             correct: 1,
             exp: "Crucial para a geração de Logs de auditoria não-destrutivos, o modo 'a' (Append) insere o ponteiro de gravação na última linha vazia disponível do arquivo texto, garantindo a imutabilidade do que já foi salvo."

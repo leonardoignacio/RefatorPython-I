@@ -1,5 +1,9 @@
+/**
+ * MOTOR OPERACIONAL DA SPA (ES2024+)
+ * Gerencia roteamento por abas, acordeons duplos e auditoria de quiz.
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Array com todas as seções importadas
     window.SECOES = [window.DATA_INTRO, window.DATA_OFICINA, window.DATA_INFRA, window.DATA_QUIZ];
     window.ESTADO = { abaAtual: "intro", respostas: {} };
 
@@ -38,7 +42,7 @@ function renderizarConteudo(id) {
     if (!secao) return;
 
     if (id === "quiz") {
-        renderizarQuiz(secao, main);
+        renderizarAbaRevisao(secao, main);
         return;
     }
 
@@ -57,7 +61,7 @@ function renderizarConteudo(id) {
                     
                     const head = document.createElement("div");
                     head.className = "acc-header";
-                    head.innerHTML = `<span><i class="fa-solid fa-terminal"></i> ${acc.title}</span> <i class="fa-solid fa-chevron-down"></i>`;
+                    head.innerHTML = `<span><i class="fa-solid fa-terminal"></i> ${acc.title}</span> <i class="fa-solid fa-chevron-down toggle-icon"></i>`;
                     
                     const body = document.createElement("div");
                     body.className = "acc-content";
@@ -65,8 +69,15 @@ function renderizarConteudo(id) {
                     
                     head.onclick = () => {
                         const open = wrap.classList.contains("active");
-                        document.querySelectorAll(".accordion").forEach(el => el.classList.remove("active"));
-                        if (!open) wrap.classList.add("active");
+                        document.querySelectorAll(".accordion").forEach(el => {
+                            el.classList.remove("active");
+                            const icon = el.querySelector(".toggle-icon");
+                            if(icon) icon.className = "fa-solid fa-chevron-down toggle-icon";
+                        });
+                        if (!open) {
+                            wrap.classList.add("active");
+                            head.querySelector(".toggle-icon").className = "fa-solid fa-chevron-up toggle-icon";
+                        }
                     };
                     
                     wrap.appendChild(head);
@@ -78,17 +89,57 @@ function renderizarConteudo(id) {
     }
 }
 
-function renderizarQuiz(secao, container) {
-    const topo = document.createElement("div");
-    topo.className = "card text-center";
-    topo.innerHTML = `<h2><i class="fa-solid fa-brain"></i> Auditoria de Conhecimento</h2>
-                      <p>Teste seus reflexos lógicos respondendo às 10 avaliações de múltipla escolha.</p>`;
+function renderizarAbaRevisao(secao, container) {
+    // 1. Bloco das Perguntas Norteadoras (Síntese Pedagógica da Dri)
+    const cardNorteadores = document.createElement("div");
+    cardNorteadores.className = "card";
+    cardNorteadores.innerHTML = `<h2><i class="fa-solid fa-compass" style="color:var(--primary)"></i> Síntese Teórica (Perguntas Norteadoras)</h2>
+                                 <p>Antes de auditar seus reflexos no quiz, explore os 5 princípios estruturais que amarraram a lógica corporativa desta aula:</p>`;
+
+    secao.guidingQuestions.forEach((item) => {
+        const acc = document.createElement("div");
+        acc.className = "accordion";
+
+        const head = document.createElement("div");
+        head.className = "acc-header";
+        head.innerHTML = `<span><i class="fa-solid fa-circle-question" style="color:var(--secondary)"></i> ${item.q}</span> <i class="fa-solid fa-chevron-down toggle-icon"></i>`;
+
+        const body = document.createElement("div");
+        body.className = "acc-content";
+        body.innerHTML = `<p style="margin:0; padding-top:0.5rem; color:var(--text-main); font-size:1.02rem;">${item.a}</p>`;
+
+        head.onclick = () => {
+            const isOpen = acc.classList.contains("active");
+            // Isola o recolhimento apenas aos norteadores deste card
+            cardNorteadores.querySelectorAll(".accordion").forEach(el => {
+                el.classList.remove("active");
+                el.querySelector(".toggle-icon").className = "fa-solid fa-chevron-down toggle-icon";
+            });
+            if (!isOpen) {
+                acc.classList.add("active");
+                head.querySelector(".toggle-icon").className = "fa-solid fa-chevron-up toggle-icon";
+            }
+        };
+
+        acc.appendChild(head);
+        acc.appendChild(body);
+        cardNorteadores.appendChild(acc);
+    });
+
+    container.appendChild(cardNorteadores);
+
+    // 2. Bloco do Quiz Diagnóstico
+    const topoQuiz = document.createElement("div");
+    topoQuiz.className = "card text-center";
+    topoQuiz.style.marginTop = "2.5rem";
+    topoQuiz.innerHTML = `<h2><i class="fa-solid fa-brain"></i> Auditoria de Conhecimento (Quiz)</h2>
+                          <p>Teste sua retenção mecânica respondendo às 10 avaliações de múltipla escolha abaixo.</p>`;
     
     const banner = document.createElement("div");
     banner.id = "score-board";
     banner.className = "score-card";
-    topo.appendChild(banner);
-    container.appendChild(topo);
+    topoQuiz.appendChild(banner);
+    container.appendChild(topoQuiz);
 
     secao.questions.forEach((q, i) => {
         const qCard = document.createElement("div");
@@ -146,5 +197,5 @@ function corrigirQuiz() {
     board.innerHTML = `<h2 style="justify-content:center; font-size:2rem; margin-bottom:0.5rem;">Nota da Avaliação: ${nota} de 10</h2>
                        <p style="color:var(--primary); font-weight:700;">${nota >= 7 ? "Excelente aprovação de Compliance!" : "Retorne à Teoria e revise os alertas em vermelho."}</p>`;
     
-    window.scrollTo({ top: board.parentElement.offsetTop, behavior: "smooth" });
+    window.scrollTo({ top: board.parentElement.offsetTop - 50, behavior: "smooth" });
 }
