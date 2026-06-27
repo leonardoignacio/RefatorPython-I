@@ -9,11 +9,61 @@ window.DATA_OFICINA = {
         {
             type: 'card',
             title: '<i class="fa-solid fa-code-branch"></i> Desenvolvimento Orientado',
-            html: '<p>Acompanhe a construção progressiva do nosso sistema. Iniciaremos construindo manualmente o "Caminho Feliz" (um script focado apenas na lógica básica, sem proteções). Em seguida, utilizaremos uma Inteligência Artificial como copiloto para adicionar resiliência (tratamento de erros), funcionalidade de auditoria (arquivos de texto) e uma Interface Gráfica.</p>'
+            html: '<p>Acompanhe a construção progressiva do nosso sistema. Iniciaremos preparando nossa estação de trabalho corporativa. Em seguida, desenvolveremos manualmente o "Caminho Feliz" (lógica pura sem proteções) e utilizaremos uma Inteligência Artificial como copiloto para refatorar o código, adicionar resiliência (try/except), gerar relatórios em disco e construir uma Interface Gráfica.</p>'
         },
         {
             type: 'accordion',
             items: [
+                {
+                    title: 'Marco Zero: Configuração do Ambiente Corporativo (CPython & VS Code)',
+                    code: codeStr([
+                        '<span class="c-comment">\'\'\'',
+                        '    GUIA DE INFRAESTRUTURA DE DESENVOLVIMENTO (Responsável: Léo)',
+                        '    Objetivo: Configurar uma estação de trabalho limpa, padronizada e produtiva.',
+                        '\'\'\'</span>',
+                        '',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># ETAPA 1: INSTALAÇÃO DO INTERPRETADOR OFICIAL (CPYTHON)</span>',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># 1. Acesse o portal oficial: https://www.python.org/downloads/</span>',
+                        '<span class="c-comment"># 2. Baixe a versão estável mais recente (Python 3.12+).</span>',
+                        '<span class="c-comment"># 3. CRÍTICO NO WINDOWS: Na primeira tela do instalador, marque obrigatoriamente</span>',
+                        '<span class="c-comment">#    a caixa "Add python.exe to PATH". Se omitir isso, o sistema operacional não</span>',
+                        '<span class="c-comment">#    reconhecerá os comandos \'python\' ou \'pip\' no terminal.</span>',
+                        '',
+                        '<span class="c-comment"># Validação no Terminal (PowerShell ou CMD):</span>',
+                        'python --version',
+                        '<span class="c-comment"># Saída esperada: Python 3.12.x</span>',
+                        '',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># ETAPA 2: INSTALAÇÃO DA IDE (VISUAL STUDIO CODE)</span>',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># 1. Baixe o VS Code: https://code.visualstudio.com/</span>',
+                        '<span class="c-comment"># 2. Durante a instalação, marque a opção "Adicionar ao PATH".</span>',
+                        '',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># ETAPA 3: EXTENSÕES OBRIGATÓRIAS NO VS CODE</span>',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># Abra o VS Code, pressione Ctrl+Shift+X e pesquise/instale o pacote oficial:</span>',
+                        '<span class="c-comment"># -> Nome: "Python" (Publicado pela Microsoft - ID: ms-python.python)</span>',
+                        '<span class="c-comment">#    (Esta extensão ativa auto-completar, linting, formatação e debug).</span>',
+                        '',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># ETAPA 4: DOMINANDO AS EXTENSÕES DE ARQUIVOS</span>',
+                        '<span class="c-comment"># ==============================================================================</span>',
+                        '<span class="c-comment"># No mercado de tecnologia, trabalhamos primariamente com dois formatos:</span>',
+                        '<span class="c-comment">#</span>',
+                        '<span class="c-comment"># • Arquivos .py (Scripts de Produção):</span>',
+                        '<span class="c-comment">#   Código estruturado sequencial ou modular. É o arquivo final que roda nos</span>',
+                        '<span class="c-comment">#   servidores, rotinas automatizadas e empacotadores (.exe).</span>',
+                        '<span class="c-comment">#</span>',
+                        '<span class="c-comment"># • Arquivos .ipynb (Jupyter Notebooks):</span>',
+                        '<span class="c-comment">#   Formato interativo dividido em "Células" de código e texto enriquecido.</span>',
+                        '<span class="c-comment">#   Extremamente utilizado para Análise de Dados, testes rápidos de Inteligência</span>',
+                        '<span class="c-comment">#   Artificial e documentação visual. Para usá-lo no VS Code, instale a</span>',
+                        '<span class="c-comment">#   extensão oficial "Jupyter" (ID: ms-toolsai.jupyter).</span>'
+                    ])
+                },
                 {
                     title: 'PMV 1.0: O "Caminho Feliz" (Execução Sequencial Pura)',
                     code: codeStr([
