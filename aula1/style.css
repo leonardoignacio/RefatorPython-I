@@ -66,11 +66,16 @@ strong { color: var(--text-title); font-weight: 600; }
 .acc-content { max-height: 0; overflow: hidden; transition: all 0.4s ease; }
 .accordion.active .acc-content { max-height: 2500px; padding: 1.5rem; border-top: 1px solid var(--border); }
 
-pre { background: var(--bg-code); color: #f8fafc; padding: 1.5rem; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.92rem; overflow-x: auto; border: 1px solid #1e293b; line-height: 1.5; margin: 1rem 0; }
+/* Blocos de Código + Botão de Copiar */
+pre { position: relative; background: var(--bg-code); color: #f8fafc; padding: 1.75rem 1.5rem 1.5rem 1.5rem; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.92rem; overflow-x: auto; border: 1px solid #1e293b; line-height: 1.5; margin: 1rem 0; }
 .c-comment { color: #64748b; font-style: italic; }
 .c-keyword { color: var(--primary); font-weight: bold; }
 .c-string { color: #10b981; }
 .c-func { color: var(--secondary); }
+
+.btn-copy { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; padding: 0.35rem 0.8rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.4rem; backdrop-filter: blur(4px); }
+.btn-copy:hover { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.btn-copy.copied { background: var(--success); color: #ffffff; border-color: var(--success); }
 
 /* Quiz */
 .quiz-item { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); transition: var(--transition); }
@@ -88,47 +93,19 @@ pre { background: var(--bg-code); color: #f8fafc; padding: 1.5rem; border-radius
 .incorrect .feedback { display: block; background: #fef2f2; border-left: 4px solid var(--danger); }
 .score-card { background: var(--bg-surface); border: 2px solid var(--secondary); border-radius: var(--radius); padding: 2rem; text-align: center; margin-bottom: 2rem; display: none; box-shadow: var(--shadow-md); }
 
-/* Media Queries (Telas Mobile <= 768px) */
+/* Media Queries Mobile */
 @media (max-width: 768px) {
     .app-header { padding: 2rem 0 1.5rem 0; }
     .app-header h1 { font-size: 1.65rem; }
     .subtitle { font-size: 0.95rem; padding: 0 0.5rem; }
-    
     .card { padding: 1.5rem; }
     .card h2 { font-size: 1.25rem; }
-    
     .nav-wrapper { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; }
     .mobile-nav-title { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 0.95rem; color: var(--text-title); }
     #btn-mobile { display: block; background: none; border: none; font-size: 1.4rem; color: var(--text-title); cursor: pointer; padding: 0.2rem; }
-    
-    .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--bg-surface);
-        flex-direction: column;
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow-lg);
-        padding: 0.5rem 0;
-        gap: 0;
-        z-index: 1000;
-    }
-    
+    .nav-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-surface); flex-direction: column; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); padding: 0.5rem 0; gap: 0; z-index: 1000; }
     .nav-menu.active { display: flex; animation: slideDown 0.2s ease; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .tab-btn {
-        width: 100%;
-        padding: 1rem 1.5rem;
-        border-bottom: none;
-        border-left: 4px solid transparent;
-        font-size: 0.95rem;
-    }
-    
-    .tab-btn.active {
-        border-left-color: var(--secondary);
-        background: #f1f5f9;
-    }
+    .tab-btn { width: 100%; padding: 1rem 1.5rem; border-bottom: none; border-left: 4px solid transparent; font-size: 0.95rem; }
+    .tab-btn.active { border-left-color: var(--secondary); background: #f1f5f9; }
 }

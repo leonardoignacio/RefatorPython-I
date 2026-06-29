@@ -1,6 +1,6 @@
 /**
  * MOTOR OPERACIONAL DA SPA (ES2024+)
- * Controla navegação acoplada a menu sanduíche mobile.
+ * Controla navegação, acordeons e gerador dinâmico de botões de cópia.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,6 +68,7 @@ function renderizarConteudo(id) {
 
     if (id === "quiz") {
         renderizarAbaRevisao(secao, main);
+        adicionarBotoesCopia(); // Garante verificação de códigos no quiz
         return;
     }
 
@@ -112,6 +113,9 @@ function renderizarConteudo(id) {
             }
         });
     }
+
+    // Varredura universal: Adiciona botão de copiar a todas as tags <pre> renderizadas
+    adicionarBotoesCopia();
 }
 
 function renderizarAbaRevisao(secao, container) {
@@ -220,4 +224,30 @@ function corrigirQuiz() {
                        <p style="color:var(--primary); font-weight:700;">${nota >= 7 ? "Excelente aprovação de Compliance!" : "Retorne à Teoria e revise os alertas em vermelho."}</p>`;
     
     window.scrollTo({ top: board.parentElement.offsetTop - 50, behavior: "smooth" });
+}
+
+// Injeção de UX: Botão de Cópia Universal
+function adicionarBotoesCopia() {
+    document.querySelectorAll("pre").forEach(preEl => {
+        if (preEl.querySelector(".btn-copy")) return; // Evita duplicidade
+
+        const btn = document.createElement("button");
+        btn.className = "btn-copy";
+        btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copiar';
+
+        btn.onclick = () => {
+            const codigoTexto = preEl.querySelector("code") ? preEl.querySelector("code").innerText : preEl.innerText;
+            navigator.clipboard.writeText(codigoTexto);
+            
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+            btn.classList.add("copied");
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copiar';
+                btn.classList.remove("copied");
+            }, 2000);
+        };
+
+        preEl.appendChild(btn);
+    });
 }
