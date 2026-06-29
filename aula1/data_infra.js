@@ -1,6 +1,6 @@
 /**
  * DADOS: DEPLOY (Empacotamento Executável Windows)
- * Baseado estritamente no paradigma de progressão didática.
+ * Baseado estritamente no paradigma de progressão didática e contorno de permissões de rede.
  */
 
 window.DATA_INFRA = {
@@ -30,9 +30,9 @@ window.DATA_INFRA = {
             <p>Instale a biblioteca empacotadora globalmente no seu ambiente de desenvolvimento:</p>
             <pre><code>pip install pyinstaller</code></pre>
 
-            <h4 style="margin-top: 2rem; color: var(--text-title);"><span class="badge" style="margin-bottom:0.5rem">Passo 2</span> Execução do Comando de Montagem</h4>
-            <p>Gere o executável passando as flags de otimização para sistemas desktop:</p>
-            <pre><code>pyinstaller --onefile --windowed --name "AuditorTechSolutions" auditoria_gui.py</code></pre>
+            <h4 style="margin-top: 2rem; color: var(--text-title);"><span class="badge" style="margin-bottom:0.5rem">Passo 2</span> Execução do Comando de Montagem Blindado</h4>
+            <p>Em redes corporativas restritas, o Windows bloqueia a criação de variáveis globais no <code>PATH</code>. Para contornar isso com segurança, chamamos o interpretador principal como entregador acionando a flag <code>-m</code> antes do módulo:</p>
+            <pre><code>python -m PyInstaller --onefile --windowed --name "AuditorTechSolutions" auditoria_gui.py</code></pre>
             `
         },
         {
@@ -43,8 +43,12 @@ window.DATA_INFRA = {
             
             <ul style="list-style: none; margin-top: 1.2rem;">
                 <li style="margin-bottom: 1.2rem; padding-left: 1rem; border-left: 3px solid var(--secondary);">
+                    <strong>python -m PyInstaller</strong>:<br>
+                    <span style="color: var(--text-muted)">Ordena ao interpretador Python acionar diretamente o pacote instalado em sua própria raiz interna, anulando erros de comando não reconhecido no terminal do Windows.</span>
+                </li>
+                <li style="margin-bottom: 1.2rem; padding-left: 1rem; border-left: 3px solid var(--secondary);">
                     <strong>--onefile</strong> (ou a versão curta <code>-F</code>):<br>
-                    <span style="color: var(--text-muted)">Garante que a saída seja compactada em um <em>único</em> arquivo .exe monolítico, em vez de gerar uma pasta aberta contendo dezenas de DLLs soltas. Ideal para distribuir por e-mail ou rede interna.</span>
+                    <span style="color: var(--text-muted)">Garante que a saída seja compactada em um <em>único</em> arquivo .exe monolítico, em vez de gerar uma pasta aberta contendo dezenas de DLLs soltas. Ideal para distribuir por e-mail ou pasta compartilhada.</span>
                 </li>
                 <li style="margin-bottom: 1.2rem; padding-left: 1rem; border-left: 3px solid var(--secondary);">
                     <strong>--windowed</strong> (ou a versão curta <code>-w</code>):<br>
@@ -64,10 +68,10 @@ window.DATA_INFRA = {
             <p>Após a conclusão do processo no terminal (que costuma levar de 30 a 60 segundos), o PyInstaller terá gerado a seguinte árvore de diretórios na sua pasta:</p>
             
             <pre><code>pasta_do_projeto/
-├── build/                  <span class="c-comment"># Arquivos temporários de montagem (Pode deletar)</span>
-├── auditoria_gui.spec      <span class="c-comment"># Manifesto de compilação avançada (Pode deletar)</span>
-├── auditoria_gui.py        <span class="c-comment"># Seu código-fonte original</span>
-└── dist/                   <span class="c-comment"># &lt;--- O SEU TESOURO ESTÁ AQUI!</span>
+├── build/                  # Arquivos temporários de montagem (Pode deletar)
+├── auditoria_gui.spec      # Manifesto de compilação avançada (Pode deletar)
+├── auditoria_gui.py        # Seu código-fonte original
+└── dist/                   # &lt;--- O SEU TESOURO ESTÁ AQUI!
     └── AuditorTechSolutions.exe</code></pre>
 
             <p>Acesse a pasta <strong><code>dist</code></strong>. O arquivo <code>AuditorTechSolutions.exe</code> gerado ali dentro é 100% autossuficiente. Você pode copiá-lo para um pendrive ou arrastá-lo para a Área de Trabalho de qualquer computador com Windows 10 ou 11 e ele rodará nativamente.</p>

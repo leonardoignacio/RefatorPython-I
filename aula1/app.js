@@ -1,6 +1,6 @@
 /**
  * MOTOR OPERACIONAL DA SPA (ES2024+)
- * Controla navegação, acordeons e gerador dinâmico de botões de cópia.
+ * Controla navegação, acordeons, menu mobile e gerador universal de botões de cópia.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,7 +68,7 @@ function renderizarConteudo(id) {
 
     if (id === "quiz") {
         renderizarAbaRevisao(secao, main);
-        adicionarBotoesCopia(); // Garante verificação de códigos no quiz
+        adicionarBotoesCopia(); 
         return;
     }
 
@@ -114,7 +114,7 @@ function renderizarConteudo(id) {
         });
     }
 
-    // Varredura universal: Adiciona botão de copiar a todas as tags <pre> renderizadas
+    // Varredura universal acionada para qualquer aba aberta (incluindo Deploy!)
     adicionarBotoesCopia();
 }
 
@@ -226,10 +226,10 @@ function corrigirQuiz() {
     window.scrollTo({ top: board.parentElement.offsetTop - 50, behavior: "smooth" });
 }
 
-// Injeção de UX: Botão de Cópia Universal
+// Motor de Injeção de UX: Botão de Cópia Universal
 function adicionarBotoesCopia() {
     document.querySelectorAll("pre").forEach(preEl => {
-        if (preEl.querySelector(".btn-copy")) return; // Evita duplicidade
+        if (preEl.querySelector(".btn-copy")) return; 
 
         const btn = document.createElement("button");
         btn.className = "btn-copy";
