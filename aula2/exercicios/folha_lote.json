@@ -1,0 +1,12 @@
+[
+    {
+        "colaborador": "Juca",
+        "cargo": "Design",
+        "liquido": 4000.0
+    },
+    {
+        "colaborador": "José",
+        "cargo": "Gerente",
+        "liquido": 6700.0
+    }
+]
